@@ -10,7 +10,9 @@ function main() {
 	test_deps
 
 	declare -A -x command_table=(
-		['pull']="pull_chart_from_release"
+		['pull']="release_pull_chart"
+		['update']="release_update_values"
+		
 	)
 
 	local commands="${!command_table[@]}"
@@ -22,7 +24,7 @@ function main() {
 
 	if [[ $fn_name == '' ]]; then exit_with_help "$msg"; fi
 	if $fn_name $@; then 
-		rm -Rf $(dirname -- "$0")/data;
+		#rm -Rf $(dirname -- "$0")/data;
 		return 0; 
 	else 
 		return 1; 
